@@ -178,3 +178,7 @@ conexao.close()
 
 print(f"\n{len(linhas)} leads novos gravados no banco.")
 print(f"Total no banco agora: {len(ja_no_banco) + len(linhas)}")
+
+
+# Guarda todos os leads pontuados (fica só no computador: data/*.csv está no .gitignore)
+df.to_csv(PASTA / "data" / "leads_pontuados.csv", index=False)
