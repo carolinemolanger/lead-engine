@@ -12,5 +12,27 @@ services:
       - pg_data:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d
 
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: lead_n8n
+    ports:
+      - "5678:5678"
+    environment:
+      GENERIC_TIMEZONE: America/Sao_Paulo
+      TZ: America/Sao_Paulo
+      N8N_SECURE_COOKIE: "false"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lead_mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+
 volumes:
   pg_data:
+  n8n_data:
